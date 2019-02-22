@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace api.Tests
 {
-    public class FizzBuzzTest
+    public class FizzBuzzPinkFlamingoTest
     {
         [Test]
         public void TestEmptySequence()
@@ -10,9 +10,9 @@ namespace api.Tests
             Assert.AreEqual(
                 new []
                 {
-                    "FizzBuzz"
+                    "Pink Flamingo"
                 },
-                FizzBuzz.GenerateSequence(0)
+                FizzBuzzPinkFlamingo.GenerateSequence(0)
             );
         }
         
@@ -22,10 +22,10 @@ namespace api.Tests
             Assert.AreEqual(
                 new []
                 {
-                    "FizzBuzz",
-                    "1"
+                    "Pink Flamingo",
+                    "Flamingo"
                 },
-                FizzBuzz.GenerateSequence(1)
+                FizzBuzzPinkFlamingo.GenerateSequence(1)
             );
         }
         
@@ -35,12 +35,12 @@ namespace api.Tests
             Assert.AreEqual(
                 new []
                 {
-                    "FizzBuzz",
-                    "1",
-                    "2",
+                    "Pink Flamingo",
+                    "Flamingo",
+                    "Flamingo",
                     "Fizz"
                 },
-                FizzBuzz.GenerateSequence(3)
+                FizzBuzzPinkFlamingo.GenerateSequence(3)
             );
         }
         
@@ -50,14 +50,14 @@ namespace api.Tests
             Assert.AreEqual(
                 new []
                 {
-                    "FizzBuzz",
-                    "1",
-                    "2",
+                    "Pink Flamingo",
+                    "Flamingo",
+                    "Flamingo",
                     "Fizz",
                     "4",
                     "Buzz"
                 },
-                FizzBuzz.GenerateSequence(5)
+                FizzBuzzPinkFlamingo.GenerateSequence(5)
             );
         }
         
@@ -67,24 +67,24 @@ namespace api.Tests
             Assert.AreEqual(
                 new []
                 {
-                    "FizzBuzz",
-                    "1",
-                    "2",
+                    "Pink Flamingo",
+                    "Flamingo",
+                    "Flamingo",
                     "Fizz",
                     "4",
                     "Buzz",
                     "Fizz",
                     "7",
-                    "8",
+                    "Flamingo",
                     "Fizz",
                     "Buzz",
                     "11",
                     "Fizz",
-                    "13",
+                    "Flamingo",
                     "14",
                     "FizzBuzz"
                 },
-                FizzBuzz.GenerateSequence(15)
+                FizzBuzzPinkFlamingo.GenerateSequence(15)
             );
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace api
 {
-  public class FizzBuzz
+  public class FizzBuzzPinkFlamingo
   {
     public static string[] GenerateSequence(uint endNumber)
     {

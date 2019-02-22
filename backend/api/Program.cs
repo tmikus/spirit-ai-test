@@ -26,7 +26,7 @@ namespace api
                 return;
             }
 
-            var output = FizzBuzz.GenerateSequence(number);
+            var output = FizzBuzzPinkFlamingo.GenerateSequence(number);
             foreach (var line in output)
             {
                 Console.WriteLine(line);

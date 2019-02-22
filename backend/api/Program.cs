@@ -14,7 +14,23 @@ namespace api
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            // TODO: Uncomment this once there's a need for a WebAPI
+            // CreateWebHostBuilder(args).Build().Run();
+            Console.WriteLine("What number would you like me to count to?");
+            Console.Write("[0-100]:");
+            var input = Console.ReadLine();
+            uint number;
+            if (!uint.TryParse(input, out number) || number > 100)
+            {
+                Console.WriteLine("'{0}' is not a valid number. Bye!", input);
+                return;
+            }
+
+            var output = FizzBuzz.GenerateSequence(number);
+            foreach (var line in output)
+            {
+                Console.WriteLine(line);
+            }
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

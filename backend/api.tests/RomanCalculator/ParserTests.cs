@@ -88,6 +88,26 @@ namespace api.Tests.RomanCalculator
         }
 
         [Test]
+        public void TestPower()
+        {
+            var parser = new Parser(new []
+            {
+                new Token(TokenType.Number, "V"),
+                new Token(TokenType.Hat, "^"), 
+                new Token(TokenType.Number, "II"), 
+            });
+            var result = parser.Parse();
+            Assert.AreEqual(
+                new BinaryExpression(
+                    new LiteralExpression(new Token(TokenType.Number, "V")),
+                    new Token(TokenType.Hat, "^"),
+                    new LiteralExpression(new Token(TokenType.Number, "II"))
+                ),
+                result
+            );
+        }
+
+        [Test]
         public void TestGrouping()
         {
             // (V - I) * X

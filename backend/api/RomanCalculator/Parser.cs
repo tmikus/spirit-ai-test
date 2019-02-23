@@ -70,7 +70,7 @@ namespace api.RomanCalculator
 
         private Expression Multiplication()
         {
-            var expr = Unary();
+            var expr = Power();
             while (MatchToken(TokenType.Star, TokenType.Slash))
             {
                 var oper = PreviousToken();
@@ -87,6 +87,19 @@ namespace api.RomanCalculator
         }
 
         private Token PeekToken() => _tokens[_current];
+
+        private Expression Power()
+        {
+            var expr = Unary();
+            while (MatchToken(TokenType.Hat))
+            {
+                var oper = PreviousToken();
+                var right = Power();
+                expr = new BinaryExpression(expr, oper, right);
+            }
+
+            return expr;
+        }
 
         private Token PreviousToken() => _tokens[_current - 1];
 

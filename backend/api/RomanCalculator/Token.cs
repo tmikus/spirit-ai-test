@@ -11,14 +11,17 @@ namespace api.RomanCalculator
             Lexeme = lexeme;
         }
 
-        public override bool Equals(object obj)
-        {
-            return obj is Token token && Equals(token);
-        }
-
-        private bool Equals(Token other)
+        protected bool Equals(Token other)
         {
             return string.Equals(Lexeme, other.Lexeme) && Type == other.Type;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Token) obj);
         }
 
         public override int GetHashCode()

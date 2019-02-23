@@ -15,10 +15,7 @@ namespace api.Tests.RomanCalculator
             });
             var result = parser.Parse();
             Assert.AreEqual(
-                new []
-                {
-                    new LiteralExpression(new Token(TokenType.Number, "X")),
-                },
+                new LiteralExpression(new Token(TokenType.Number, "X")),
                 result
             );
         }
@@ -34,13 +31,10 @@ namespace api.Tests.RomanCalculator
             });
             var result = parser.Parse();
             Assert.AreEqual(
-                new []
-                {
-                    new UnaryExpression(
-                        new Token(TokenType.Minus, "-"),
-                        new LiteralExpression(new Token(TokenType.Number, "X"))
-                    ),
-                },
+                new UnaryExpression(
+                    new Token(TokenType.Minus, "-"),
+                    new LiteralExpression(new Token(TokenType.Number, "X"))
+                ),
                 result
             );
         }
@@ -57,14 +51,11 @@ namespace api.Tests.RomanCalculator
             });
             var result = parser.Parse();
             Assert.AreEqual(
-                new []
-                {
-                    new BinaryExpression(
-                        new LiteralExpression(new Token(TokenType.Number, "V")),
-                        new Token(TokenType.Plus, "+"),
-                        new LiteralExpression(new Token(TokenType.Number, "X"))
-                    ),
-                },
+                  new BinaryExpression(
+                    new LiteralExpression(new Token(TokenType.Number, "V")),
+                    new Token(TokenType.Plus, "+"),
+                    new LiteralExpression(new Token(TokenType.Number, "X"))
+                ),
                 result
             );
         }
@@ -83,18 +74,15 @@ namespace api.Tests.RomanCalculator
             });
             var result = parser.Parse();
             Assert.AreEqual(
-                new []
-                {
+                new BinaryExpression(
+                    new LiteralExpression(new Token(TokenType.Number, "V")),
+                    new Token(TokenType.Minus, "-"), 
                     new BinaryExpression(
-                        new LiteralExpression(new Token(TokenType.Number, "V")),
-                        new Token(TokenType.Minus, "-"), 
-                        new BinaryExpression(
-                            new LiteralExpression(new Token(TokenType.Number, "I")),
-                            new Token(TokenType.Star, "*"),
-                            new LiteralExpression(new Token(TokenType.Number, "X"))
-                        )
+                        new LiteralExpression(new Token(TokenType.Number, "I")),
+                        new Token(TokenType.Star, "*"),
+                        new LiteralExpression(new Token(TokenType.Number, "X"))
                     )
-                },
+                ),
                 result
             );
         }
@@ -115,20 +103,17 @@ namespace api.Tests.RomanCalculator
             });
             var result = parser.Parse();
             Assert.AreEqual(
-                new []
-                {
-                    new BinaryExpression(
-                        new GroupingExpression(
-                            new BinaryExpression(
-                                new LiteralExpression(new Token(TokenType.Number, "V")),
-                                new Token(TokenType.Minus, "-"),
-                                new LiteralExpression(new Token(TokenType.Number, "I"))
-                            )
-                        ),
-                        new Token(TokenType.Star, "*"),
-                        new LiteralExpression(new Token(TokenType.Number, "X"))
-                    )
-                },
+                new BinaryExpression(
+                    new GroupingExpression(
+                        new BinaryExpression(
+                            new LiteralExpression(new Token(TokenType.Number, "V")),
+                            new Token(TokenType.Minus, "-"),
+                            new LiteralExpression(new Token(TokenType.Number, "I"))
+                        )
+                    ),
+                    new Token(TokenType.Star, "*"),
+                    new LiteralExpression(new Token(TokenType.Number, "X"))
+                ),
                 result
             );
         }

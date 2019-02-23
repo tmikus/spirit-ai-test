@@ -43,11 +43,11 @@ export default class FizzBuzz extends React.PureComponent<FizzBuzzProps, FizzBuz
           <Grid
             container
             direction="column"
-            alignItems="center"
             spacing={16}
           >
             <Grid item>
               <TextField
+                fullWidth
                 onChange={this.handleCountToChange}
                 placeholder="What number to count to?"
                 required

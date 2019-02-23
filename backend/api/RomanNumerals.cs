@@ -6,7 +6,32 @@ namespace api
     {
         public static string FromArabic(int number)
         {
-            throw new NotImplementedException();
+            if (number <= 0)
+            {
+                throw new ArgumentException($"Invalid number supplied: {number}");
+            }
+
+            var hundreds = new[] {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+            var tens = new []    {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+            var ones = new []    {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+            
+            var result = "";
+
+            while (number >= 1000)
+            {
+                result += "M";
+                number -= 1000;
+            }
+
+            result += hundreds[number / 100];
+            number = number % 100;
+
+            result += tens[number / 10];
+            number = number % 10;
+
+            result += ones[number];
+            
+            return result;
         }
 
         private static int GetRomanNumeralValue(char numeral)

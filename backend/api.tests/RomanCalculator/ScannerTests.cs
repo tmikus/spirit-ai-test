@@ -6,7 +6,21 @@ namespace api.Tests.RomanCalculator
     public class ScannerTests
     {
         [Test]
-        public void TestPlainNumber()
+        public void TestNumber()
+        {
+            var scanner = new Scanner("X");
+            var result = scanner.ScanTokens();
+            Assert.AreEqual(
+                new []
+                {
+                    new Token(TokenType.Number, "X"),
+                },
+                result
+            );
+        }
+        
+        [Test]
+        public void TestLongNumber()
         {
             var scanner = new Scanner("MCXX");
             var result = scanner.ScanTokens();

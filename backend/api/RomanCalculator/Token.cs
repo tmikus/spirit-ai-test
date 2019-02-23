@@ -10,5 +10,23 @@ namespace api.RomanCalculator
             Type = type;
             Lexeme = lexeme;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Token token && Equals(token);
+        }
+
+        private bool Equals(Token other)
+        {
+            return string.Equals(Lexeme, other.Lexeme) && Type == other.Type;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Lexeme.GetHashCode() * 397) ^ (int) Type;
+            }
+        }
     }
 }

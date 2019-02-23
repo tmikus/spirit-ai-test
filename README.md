@@ -29,9 +29,9 @@
     - [X] Power
     - [X] Brackets
 5. [X] Expose the above features in a Web API
-6. [ ] Build a nice frontend
-7. [ ] Dockerise both frontend and backend
-8. [ ] SHIP IT!
+6. [X] Build a nice frontend
+7. [X] Dockerise both frontend and backend
+8. [X] SHIP IT!
 
 ## Running project
 
@@ -42,12 +42,18 @@ The following instructions expect you to run the project on a pre-defined port, 
     ```bash
     docker build -t api .
     ```
-2. Run the API on port 8080
+2. Run the API on port 8081
     ```bash
     docker run -d -p 8081:80 --name api-instance api
     ```
-    
-// TODO: Add the instruction on how to start the frontend
+3. Navigate to `frontend` folder and build project's docker image:
+    ```bash
+    docker build -t frontend .
+    ```
+4. Run the Frontend on port 8080
+    ```bash
+    docker run -d -p 8080:80 --name frontend-instance frontend
+    ``` 
     
 ## Final thoughts
 

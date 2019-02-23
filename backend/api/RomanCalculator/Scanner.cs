@@ -19,7 +19,11 @@ namespace api.RomanCalculator
         private void AddToken(TokenType type)
         {
             var lexeme = _source.Substring(_start, _current - _start);
-            _tokens.Add(new Token(type, lexeme));
+            _tokens.Add(
+                type == TokenType.Number
+                ? new Token(type, lexeme, RomanNumerals.ToArabic(lexeme))
+                : new Token(type, lexeme)
+            );
         }
 
         private void Advance()

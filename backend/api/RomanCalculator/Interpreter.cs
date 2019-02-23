@@ -6,7 +6,7 @@ namespace api.RomanCalculator
     {
         public string Interpret(Expression expression)
         {
-            throw new NotImplementedException();
+            return RomanNumerals.FromArabic(expression.Execute());
         }
     }
 }

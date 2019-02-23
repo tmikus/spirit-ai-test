@@ -8,12 +8,13 @@ namespace api.Tests.RomanCalculator
         [Test]
         public void TestNumber()
         {
+            // 10
             var scanner = new Scanner("X");
             var result = scanner.ScanTokens();
             Assert.AreEqual(
                 new []
                 {
-                    new Token(TokenType.Number, "X"),
+                    new Token(TokenType.Number, "X", 10),
                 },
                 result
             );
@@ -22,12 +23,13 @@ namespace api.Tests.RomanCalculator
         [Test]
         public void TestLongNumber()
         {
+            // 1120
             var scanner = new Scanner("MCXX");
             var result = scanner.ScanTokens();
             Assert.AreEqual(
                 new []
                 {
-                    new Token(TokenType.Number, "MCXX"),
+                    new Token(TokenType.Number, "MCXX", 1120),
                 },
                 result
             );
@@ -36,14 +38,15 @@ namespace api.Tests.RomanCalculator
         [Test]
         public void TestNumberAddNumber()
         {
+            // 10 + 100
             var scanner = new Scanner("X + C");
             var result = scanner.ScanTokens();
             Assert.AreEqual(
                 new []
                 {
-                    new Token(TokenType.Number, "X"),
+                    new Token(TokenType.Number, "X", 10),
                     new Token(TokenType.Plus, "+"),
-                    new Token(TokenType.Number, "C"), 
+                    new Token(TokenType.Number, "C", 100), 
                 },
                 result
             );
@@ -52,15 +55,16 @@ namespace api.Tests.RomanCalculator
         [Test]
         public void TestNumberAddNumberInParen()
         {
+            // (10 + 100)
             var scanner = new Scanner("(X + C)");
             var result = scanner.ScanTokens();
             Assert.AreEqual(
                 new []
                 {
                     new Token(TokenType.LeftParen, "("),
-                    new Token(TokenType.Number, "X"),
+                    new Token(TokenType.Number, "X", 10),
                     new Token(TokenType.Plus, "+"),
-                    new Token(TokenType.Number, "C"),
+                    new Token(TokenType.Number, "C", 100),
                     new Token(TokenType.RightParen, ")"),
                 },
                 result
@@ -76,7 +80,7 @@ namespace api.Tests.RomanCalculator
                 new []
                 {
                     new Token(TokenType.LeftParen, "("),
-                    new Token(TokenType.Number, "MCIX"),
+                    new Token(TokenType.Number, "MCIX", 1109),
                     new Token(TokenType.Plus, "+"),
                     new Token(TokenType.Minus, "-"),
                     new Token(TokenType.Star, "*"),

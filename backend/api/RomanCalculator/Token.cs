@@ -4,16 +4,20 @@ namespace api.RomanCalculator
     {
         public string Lexeme { get; }
         public TokenType Type { get; }
+        
+        public int? Value { get; }
+        
 
-        public Token(TokenType type, string lexeme)
+        public Token(TokenType type, string lexeme, int? value = null)
         {
             Type = type;
             Lexeme = lexeme;
+            Value = value;
         }
 
         protected bool Equals(Token other)
         {
-            return string.Equals(Lexeme, other.Lexeme) && Type == other.Type;
+            return string.Equals(Lexeme, other.Lexeme) && Type == other.Type && Value == other.Value;
         }
 
         public override bool Equals(object obj)
@@ -28,7 +32,10 @@ namespace api.RomanCalculator
         {
             unchecked
             {
-                return (Lexeme.GetHashCode() * 397) ^ (int) Type;
+                var hashCode = (Lexeme != null ? Lexeme.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (int) Type;
+                hashCode = (hashCode * 397) ^ Value.GetHashCode();
+                return hashCode;
             }
         }
     }

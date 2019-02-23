@@ -5,6 +5,15 @@ namespace api.Tests
     public class RomanNumeralsToArabicTests
     {
         [Test]
+        public void Test0()
+        {
+            Assert.AreEqual(
+                0,
+                RomanNumerals.ToArabic("0")
+            );
+        }
+        
+        [Test]
         public void TestI()
         {
             Assert.AreEqual(

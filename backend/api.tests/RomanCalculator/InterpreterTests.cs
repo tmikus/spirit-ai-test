@@ -17,7 +17,7 @@ namespace api.Tests.RomanCalculator
         public void TestLiteralExpression()
         {
             var result = _interpreter.Interpret(
-                new LiteralExpression(new Token(TokenType.Number, "IV"))
+                new LiteralExpression(new Token(TokenType.Number, "IV", 4))
             );
             Assert.AreEqual("IV", result);
         }
@@ -29,7 +29,7 @@ namespace api.Tests.RomanCalculator
             var result = _interpreter.Interpret(
                 new UnaryExpression(
                     new Token(TokenType.Minus, "-"),
-                    new LiteralExpression(new Token(TokenType.Number, "X"))
+                    new LiteralExpression(new Token(TokenType.Number, "X", 10))
                 )
             );
             Assert.AreEqual("-X", result);
@@ -41,9 +41,9 @@ namespace api.Tests.RomanCalculator
             // I + I
             var result = _interpreter.Interpret(
                 new BinaryExpression(
-                    new LiteralExpression(new Token(TokenType.Number, "I")),
+                    new LiteralExpression(new Token(TokenType.Number, "I", 1)),
                     new Token(TokenType.Plus, "+"),
-                    new LiteralExpression(new Token(TokenType.Number, "I"))
+                    new LiteralExpression(new Token(TokenType.Number, "I", 1))
                 )
             );
             Assert.AreEqual("II", result);
@@ -55,12 +55,12 @@ namespace api.Tests.RomanCalculator
             // I + I + I
             var result = _interpreter.Interpret(
                 new BinaryExpression(
-                    new LiteralExpression(new Token(TokenType.Number, "I")),
+                    new LiteralExpression(new Token(TokenType.Number, "I", 1)),
                     new Token(TokenType.Plus, "+"),
                     new BinaryExpression(
-                        new LiteralExpression(new Token(TokenType.Number, "I")),
+                        new LiteralExpression(new Token(TokenType.Number, "I", 1)),
                         new Token(TokenType.Plus, "+"),
-                        new LiteralExpression(new Token(TokenType.Number, "I"))
+                        new LiteralExpression(new Token(TokenType.Number, "I", 1))
                     )
                 )
             );
@@ -73,9 +73,9 @@ namespace api.Tests.RomanCalculator
             // II - I
             var result = _interpreter.Interpret(
                 new BinaryExpression(
-                    new LiteralExpression(new Token(TokenType.Number, "II")),
+                    new LiteralExpression(new Token(TokenType.Number, "II", 2)),
                     new Token(TokenType.Minus, "-"),
-                    new LiteralExpression(new Token(TokenType.Number, "I"))
+                    new LiteralExpression(new Token(TokenType.Number, "I", 1))
                 )
             );
             Assert.AreEqual("I", result);
@@ -88,15 +88,15 @@ namespace api.Tests.RomanCalculator
             var result = _interpreter.Interpret(
                 new BinaryExpression(
                     new BinaryExpression(
-                        new LiteralExpression(new Token(TokenType.Number, "I")),
+                        new LiteralExpression(new Token(TokenType.Number, "I", 1)),
                         new Token(TokenType.Minus, "-"),
-                        new LiteralExpression(new Token(TokenType.Number, "I"))
+                        new LiteralExpression(new Token(TokenType.Number, "I", 1))
                     ),
                     new Token(TokenType.Minus, "-"),
-                    new LiteralExpression(new Token(TokenType.Number, "I"))
+                    new LiteralExpression(new Token(TokenType.Number, "I", 1))
                 )
             );
-            Assert.AreEqual("I", result);
+            Assert.AreEqual("-I", result);
         }
         
         [Test]
@@ -105,9 +105,9 @@ namespace api.Tests.RomanCalculator
             // I * II
             var result = _interpreter.Interpret(
                 new BinaryExpression(
-                    new LiteralExpression(new Token(TokenType.Number, "I")),
+                    new LiteralExpression(new Token(TokenType.Number, "I", 1)),
                     new Token(TokenType.Star, "*"),
-                    new LiteralExpression(new Token(TokenType.Number, "II"))
+                    new LiteralExpression(new Token(TokenType.Number, "II", 2))
                 )
             );
             Assert.AreEqual("II", result);
@@ -120,15 +120,15 @@ namespace api.Tests.RomanCalculator
             var result = _interpreter.Interpret(
                 new BinaryExpression(
                     new BinaryExpression(
-                        new LiteralExpression(new Token(TokenType.Number, "I")),
+                        new LiteralExpression(new Token(TokenType.Number, "I", 1)),
                         new Token(TokenType.Star, "*"),
-                        new LiteralExpression(new Token(TokenType.Number, "II"))
+                        new LiteralExpression(new Token(TokenType.Number, "II", 2))
                     ), 
                     new Token(TokenType.Star, "*"),
-                    new LiteralExpression(new Token(TokenType.Number, "IV"))
+                    new LiteralExpression(new Token(TokenType.Number, "IV", 4))
                 )
             );
-            Assert.AreEqual("XIII", result);
+            Assert.AreEqual("VIII", result);
         }
         
         [Test]
@@ -137,9 +137,9 @@ namespace api.Tests.RomanCalculator
             // II ^ VI
             var result = _interpreter.Interpret(
                 new BinaryExpression(
-                    new LiteralExpression(new Token(TokenType.Number, "II")),
-                    new Token(TokenType.Star, "^"),
-                    new LiteralExpression(new Token(TokenType.Number, "VI"))
+                    new LiteralExpression(new Token(TokenType.Number, "II", 2)),
+                    new Token(TokenType.Hat, "^"),
+                    new LiteralExpression(new Token(TokenType.Number, "VI", 6))
                 )
             );
             Assert.AreEqual("LXIV", result);

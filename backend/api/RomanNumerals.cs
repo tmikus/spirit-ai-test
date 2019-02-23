@@ -6,16 +6,15 @@ namespace api
     {
         public static string FromArabic(int number)
         {
-            if (number <= 0)
-            {
-                throw new ArgumentException($"Invalid number supplied: {number}");
-            }
+            if (number == 0) return "0";
+            var negative = number < 0;
+            number = Math.Abs(number);
 
             var hundreds = new[] {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
             var tens = new []    {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
             var ones = new []    {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
             
-            var result = "";
+            var result = negative ? "-" : "";
 
             while (number >= 1000)
             {
@@ -38,6 +37,7 @@ namespace api
         {
             switch (numeral)
             {
+                case '0': return 0;
                 case 'I': return 1;
                 case 'V': return 5;
                 case 'X': return 10;

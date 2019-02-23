@@ -1,8 +1,10 @@
+using System;
+
 namespace api.RomanCalculator
 {
     public interface Expression
     {
-        // TODO: Implement
+        int Execute();
     }
 
     public class LiteralExpression : Expression
@@ -30,6 +32,21 @@ namespace api.RomanCalculator
         public override int GetHashCode()
         {
             return _token.GetHashCode();
+        }
+
+        public int Execute()
+        {
+            if (_token.Type != TokenType.Number)
+            {
+                throw new InvalidOperationException("Invalid token in a literal expression");
+            }
+
+            if (!_token.Value.HasValue)
+            {
+                throw new InvalidOperationException("Number token is missing a value.");
+            }
+
+            return _token.Value.Value;
         }
     }
 
@@ -62,6 +79,17 @@ namespace api.RomanCalculator
             unchecked
             {
                 return (_oper.GetHashCode() * 397) ^ _expression.GetHashCode();
+            }
+        }
+
+        public int Execute()
+        {
+            var value = _expression.Execute();
+            switch (_oper.Type)
+            {
+                case TokenType.Plus: return value;
+                case TokenType.Minus: return -value;
+                default: throw new InvalidOperationException("Invalid unary operator.");
             }
         }
     }
@@ -102,6 +130,21 @@ namespace api.RomanCalculator
                 return hashCode;
             }
         }
+
+        public int Execute()
+        {
+            var leftVal = _left.Execute();
+            var rightVal = _right.Execute();
+            switch (_oper.Type)
+            {
+                case TokenType.Plus: return leftVal + rightVal;
+                case TokenType.Minus: return leftVal - rightVal;
+                case TokenType.Star: return leftVal * rightVal;
+                case TokenType.Slash: return leftVal / rightVal;
+                case TokenType.Hat: return (int)Math.Pow(leftVal, rightVal);
+                default: throw new InvalidOperationException("Invalid binary operator.");
+            }
+        }
     }
 
     public class GroupingExpression : Expression
@@ -129,6 +172,11 @@ namespace api.RomanCalculator
         public override int GetHashCode()
         {
             return _expression.GetHashCode();
+        }
+
+        public int Execute()
+        {
+            return _expression.Execute();
         }
     }
 }
